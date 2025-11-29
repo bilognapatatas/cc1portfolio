@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <canvas id="starfield"></canvas>
+
+  <header class="glass-header">
+    <h1>Hi, I’m <span>Raiah Crista Ucol</span></h1>
+    <p class="subtitle">IT Professional</p>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="education.html">Education</a>
+      <a href="achievements.html">Achievements</a>
+      <a href="myfamily.html">My Family</a>
+    </nav>
+  </header>
+
+  <!-- Bottom Navigation Buttons -->
+  <div class="bottom-nav">
+      <a href="education.html" class="nav-button">Next →</a>
+  </div>
+
+  <style>
+      /* Prevent scrolling */
+      html, body {
+          overflow: hidden;
+          height: 100%;
+      }
+
+      /* Bottom Navigation Buttons */
+      .bottom-nav {
+          position: fixed;
+          bottom: 20px;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+          z-index: 100;
+      }
+
+      .nav-button {
+          padding: 0.7rem 1.5rem;
+          border-radius: 15px;
+          background: rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(14px);
+          color: #ffeecf;
+          font-weight: 600;
+          text-decoration: none;
+          box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+          transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      }
+
+      .nav-button:hover {
+          transform: translateY(-5px) scale(1.05);
+          box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.15);
+      }
+
+      @media (max-width: 768px) {
+          .bottom-nav {
+              gap: 15px;
+          }
+
+          .nav-button {
+              padding: 0.5rem 1rem;
+              font-size: 0.9rem;
+          }
+      }
+  </style>
+
+  <main>
+    <!-- ✅ FIXED ABOUT ME SECTION -->
+    <section class="about glass">
+      <div class="profile-img">
+        <img src="rai.jpg" alt="Raiah Crista Ucol" />
+      </div>
+
+      <div class="text">
+        <h2>About Me</h2>
+        <p>
+          Hello and welcome to my portfolio! I’m an IT student at the University of the Cordilleras, passionate about technology and its potential to transform lives. 
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact glass">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:raicu1907@gmail.com">raicu1907@gmail.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Raiah Crista</p>
+  </footer>
+</body>
+</html>
