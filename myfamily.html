@@ -18,7 +18,7 @@ body {
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding-top:3rem;
+    padding-top:5rem; /* increased to leave space for top nav */
 }
 
 /* Starfield */
@@ -32,25 +32,53 @@ body {
     font-size:3rem;
     color:#ffeecf;
     text-shadow:0 0 15px rgba(255,255,200,0.7);
-    margin-bottom:2rem;
+    margin-bottom:1.5rem;
 }
 
-/* Container for vertical cards */
+/* TOP NAVIGATION */
+.top-nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 12px;
+}
+.top-nav a {
+    color: #ffeecf;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
+    opacity: 0.85;
+}
+.top-nav a:hover,
+.top-nav a.active {
+    opacity: 1;
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.15);
+}
+
+/* Container for full-screen-wide cards */
 .family-container {
     display:flex;
     flex-direction:row;
     justify-content:center;
-    align-items:flex-start;
-    gap:20px;
+    align-items:center;
+    gap:40px;
     width:95%;
-    height:auto;
+    height:60vh;
+    margin-top:2rem;
 }
 
 /* Individual vertical rectangle cards */
 .family-card {
     flex:1;
-    min-width:250px;
-    max-width:350px;
+    height:75vh;
     background: rgba(240,240,240,0.08);
     backdrop-filter: blur(14px);
     border-radius:20px;
@@ -61,51 +89,45 @@ body {
     justify-content:flex-start;
     text-align:center;
     box-shadow:0 4px 20px rgba(240,240,240,0.1);
-    opacity:0; /* start invisible */
-    transform: scale(0.95); /* slightly smaller */
+    opacity:0;
+    transform: scale(0.95);
     animation: fadePulse 0.8s forwards;
     transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
+.family-card:nth-child(1) { animation-delay:0.2s; }
+.family-card:nth-child(2) { animation-delay:0.4s; }
+.family-card:nth-child(3) { animation-delay:0.6s; }
 
-/* Stagger animation delay for each card */
-.family-card:nth-child(1) { animation-delay: 0.2s; }
-.family-card:nth-child(2) { animation-delay: 0.4s; }
-.family-card:nth-child(3) { animation-delay: 0.6s; }
-
-/* Fade-in + gentle pulse keyframes */
 @keyframes fadePulse {
-    0% { opacity:0; transform: scale(0.95); }
-    50% { opacity:1; transform: scale(1.02); }
-    100% { opacity:1; transform: scale(1); }
+    0% { opacity:0; transform:scale(0.95); }
+    50% { opacity:1; transform:scale(1.02); }
+    100% { opacity:1; transform:scale(1); }
 }
 
-/* Hover pulse */
+/* Hover */
 .family-card:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow:0 10px 35px rgba(255,255,220,0.3);
     filter: brightness(1.1) saturate(1.05);
 }
 
-/* Image & Text */
+/* Image */
 .family-image {
     width:100%;
-    height:180px;
+    height:60%;
     object-fit:cover;
     border-radius:15px;
     margin-bottom:1rem;
     border:1px solid rgba(240,240,240,0.2);
 }
-.family-text {
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
+
 .family-title {
     font-size:1.6rem;
     font-weight:700;
     color:#ffeecf;
-    margin-bottom:0.5rem;
+    margin-bottom:0.4rem;
 }
+
 .family-message {
     font-size:1rem;
     font-style:italic;
@@ -134,10 +156,9 @@ body {
 .bottom-nav {
     position: fixed;
     bottom: 20px;
-    width: 100%;
+    right: 20px;
     display: flex;
-    justify-content: center;
-    gap: 30px;
+    justify-content: flex-end;
     z-index: 100;
 }
 .nav-button {
@@ -158,50 +179,63 @@ body {
 }
 
 /* Responsive */
-@media(max-width:1000px){ 
-    .family-container{ flex-direction:column; gap:20px; align-items:center; }
-    .family-card{width:90%;}
-    .family-image{height:160px;}
+@media(max-width:1000px){
+    body{ overflow:auto; }
+    .family-container{
+        flex-direction:column;
+        height:auto;
+    }
+    .family-card{
+        width:90%;
+        height:auto;
+    }
+    .top-nav{ position:static; text-align:center; margin-bottom:1rem; gap:10px; }
+    .top-nav a{ font-size:0.85rem; padding:6px 10px; }
 }
 </style>
 </head>
 <body>
 
 <canvas id="starfield"></canvas>
+
+<!-- TOP NAVIGATION -->
+<div class="top-nav">
+    <a href="index.html">Home</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="myfamily.html" class="active">My Family</a>
+    <a href="mybatchmates.html">My Batchmates</a>
+</div>
+
 <h1 class="page-title">My Family</h1>
 
 <div class="family-container">
     <!-- Dad -->
     <div class="family-card">
         <img src="dad.jpg" alt="Dad Photo" class="family-image">
-        <div class="family-text">
-            <div class="family-title">Cris Ucol</div>
-            <div class="family-message">I'm proud of him for sustaining me and my family, thank you dad for slowly helping me achieve my dreams.</div>
-        </div>
+        <div class="family-title">Cris Ucol</div>
+        <div class="family-message">I'm proud of him for sustaining me and my family, thank you dad for slowly helping me achieve my dreams.</div>
     </div>
 
     <!-- Mom -->
     <div class="family-card">
         <img src="mom.jpg" alt="Mom Photo" class="family-image">
-        <div class="family-text">
-            <div class="family-title">April Joy Coronado</div>
-            <div class="family-message">The most important woman in my life, I hope in every universe and time, I'll still be her daughter.</div>
-        </div>
+        <div class="family-title">April Joy Coronado</div>
+        <div class="family-message">The most important woman in my life, I hope in every universe and time, I'll still be her daughter.</div>
     </div>
 
     <!-- Best Friend -->
     <div class="family-card">
         <img src="besh.jpg" alt="Best Friend Photo" class="family-image">
-        <div class="family-text">
-            <div class="family-title">Daneschel Delos Santos</div>
-            <div class="family-message">It's true what they say, a soulmate isn't always your lover, sometimes it's your best friend.</div>
-        </div>
+        <div class="family-title">Daneschel Delos Santos</div>
+        <div class="family-message">It's true what they say, a soulmate isn't always your lover, sometimes it's your best friend.</div>
     </div>
 </div>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav">
     <a href="achievements.html" class="nav-button">← Previous</a>
+    <a href="mybatchmates.html" class="nav-button">Next →</a>
 </div>
 
 <div id="custom-cursor"></div>
@@ -246,34 +280,6 @@ document.addEventListener('mousemove',e=>{
     cursor.style.top=e.clientY+'px'; 
     cursor.style.left=e.clientX+'px'; 
     cursor.style.transform='translate(-50%,-50%)';
-});
-setInterval(()=>{ 
-    cursor.style.transform+=' scale(1.05)'; 
-    setTimeout(()=>cursor.style.transform='translate(-50%,-50%)',200); 
-},1500);
-
-// Hover cursor & whimsical pulse
-const hoverEls=document.querySelectorAll('.family-card');
-hoverEls.forEach(el=>{
-    el.addEventListener('mouseenter',()=>{
-        cursor.style.width='40px';
-        cursor.style.height='40px';
-        cursor.style.opacity='1';
-        cursor.style.boxShadow='0 0 30px rgba(255,255,220,0.8)';
-        let scaleUp=1;
-        el.pulseInterval=setInterval(()=>{
-            scaleUp = scaleUp === 1.05 ? 1.08 : 1.05;
-            el.style.transform=`translateY(-5px) scale(${scaleUp})`;
-        },600);
-    });
-    el.addEventListener('mouseleave',()=>{
-        cursor.style.width='25px';
-        cursor.style.height='25px';
-        cursor.style.opacity='0.8';
-        cursor.style.boxShadow='0 0 20px rgba(255,255,255,0.6)';
-        clearInterval(el.pulseInterval);
-        el.style.transform='translateY(0) scale(1)';
-    });
 });
 </script>
 

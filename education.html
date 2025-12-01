@@ -1,431 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education - My Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-    <style>
-        /* Fonts & resets */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Education - My Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+/* Fonts & resets */
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            color: #f5f3ef;
-            background: radial-gradient(circle at top, #0b0f2e, #03060f 80%);
-            overflow: hidden;
-            height: 100vh;
-            cursor: none;
-        }
+body {
+    font-family: 'Cormorant Garamond', serif;
+    color: #f5f3ef;
+    background: radial-gradient(circle at top, #0b0f2e, #03060f 80%);
+    overflow: hidden;
+    height: 100vh;
+    cursor: none;
+}
 
-        /* Animated starfield canvas */
-        #starfield {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+/* Animated starfield canvas */
+#starfield { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
 
-        /* Page Title */
-        .page-title {
-            text-align: center;
-            padding: 2rem 0 1rem;
-            font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: #ffeecf;
-            text-shadow: 0 0 15px rgba(255, 255, 200, 0.7);
-            animation: floatIn 2s ease forwards;
-        }
+/* Page Title */
+.page-title {
+    text-align:center;
+    padding:2rem 0 1rem;
+    font-family: 'Great Vibes', cursive;
+    font-size:3rem;
+    color:#ffeecf;
+    text-shadow:0 0 15px rgba(255,255,200,0.7);
+    animation: floatIn 2s ease forwards;
+}
 
-        /* Education Grid Container */
-        .education-container {
-            height: calc(100vh - 150px);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 20px;
-            padding: 0 20px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+/* TOP NAVIGATION */
+.top-nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 12px;
+}
+.top-nav a {
+    color: #ffeecf;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
+    opacity: 0.85;
+}
+.top-nav a:hover,
+.top-nav a.active {
+    opacity: 1;
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.15);
+}
 
-        /* Glass Card Style */
-        .school-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(14px);
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 1.5s ease forwards;
-        }
+/* Education Grid Container */
+.education-container {
+    height: calc(100vh - 150px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 20px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
-        .school-card:nth-child(1) { animation-delay: 0.1s; }
-        .school-card:nth-child(2) { animation-delay: 0.2s; }
-        .school-card:nth-child(3) { animation-delay: 0.3s; }
-        .school-card:nth-child(4) { animation-delay: 0.4s; }
-        .school-card:nth-child(5) { animation-delay: 0.5s; }
-        .school-card:nth-child(6) { animation-delay: 0.6s; }
+/* Glass Card Style */
+.school-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 4px 20px rgba(255,255,255,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards;
+}
+.school-card:nth-child(1) { animation-delay: 0.1s; }
+.school-card:nth-child(2) { animation-delay: 0.2s; }
+.school-card:nth-child(3) { animation-delay: 0.3s; }
+.school-card:nth-child(4) { animation-delay: 0.4s; }
+.school-card:nth-child(5) { animation-delay: 0.5s; }
+.school-card:nth-child(6) { animation-delay: 0.6s; }
+.school-card:hover { transform: translateY(-8px) scale(1.02); box-shadow:0 8px 30px rgba(255,255,255,0.2); }
 
-        .school-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
-        }
+.school-image {
+    width: 100%;
+    height: 60%;
+    object-fit: cover;
+    opacity: 0.75;
+    transition: opacity 0.3s ease;
+}
+.school-card:hover .school-image { opacity:0.9; }
 
-        .school-image {
-            width: 100%;
-            height: 60%;
-            object-fit: cover;
-            opacity: 0.75;
-            transition: opacity 0.3s ease;
-        }
+.school-info {
+    padding: 1.2rem;
+    height: 40%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.school-level { font-size:0.85rem; color:#a7d8ff; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:0.5rem; font-weight:600; }
+.school-name { font-size:1.15rem; font-weight:700; margin-bottom:0.5rem; line-height:1.3; color:#ffeecf; }
+.school-years { font-size:0.95rem; color:#d3ecff; font-style:italic; }
 
-        .school-card:hover .school-image {
-            opacity: 0.9;
-        }
+/* Bottom Navigation Buttons */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap:10px;
+    z-index: 100;
+}
+.nav-button {
+    padding: 0.7rem 1.5rem;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    color: #ffeecf;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(255,255,255,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.nav-button:hover { transform: translateY(-5px) scale(1.05); box-shadow:0 8px 30px rgba(255,255,255,0.2); background: rgba(255,255,255,0.15); }
 
-        .school-info {
-            padding: 1.2rem;
-            height: 40%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+/* Custom Magical Cursor */
+#custom-cursor {
+    position: fixed;
+    top:0; left:0;
+    width:25px; height:25px;
+    border-radius:50%;
+    pointer-events:none;
+    background: radial-gradient(circle, #ffeecf 20%, #a7d8ff 80%);
+    box-shadow:0 0 20px rgba(255,255,255,0.6);
+    mix-blend-mode: screen;
+    opacity: 0.8;
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+    z-index:1000;
+}
 
-        .school-level {
-            font-size: 0.85rem;
-            color: #a7d8ff;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
+/* Animations */
+@keyframes fadeIn { from{ opacity:0; transform:translateY(20px); } to{ opacity:1; transform:translateY(0); } }
+@keyframes floatIn { from{ opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);} }
 
-        .school-name {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-            color: #ffeecf;
-        }
-
-        .school-years {
-            font-size: 0.95rem;
-            color: #d3ecff;
-            font-style: italic;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-        }
-
-        nav a {
-            color: #d3ecff;
-            margin: 0 1rem;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        nav a:hover, nav .active {
-            color: #ffeecf;
-        }
-
-        /* Custom Magical Cursor */
-        #custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            pointer-events: none;
-            background: radial-gradient(circle, #ffeecf 20%, #a7d8ff 80%);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-            mix-blend-mode: screen;
-            opacity: 0.8;
-            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
-            z-index: 1000;
-        }
-
-        .school-card:hover ~ #custom-cursor,
-        a:hover ~ #custom-cursor {
-            width: 40px;
-            height: 40px;
-            opacity: 1;
-            box-shadow: 0 0 30px rgba(255, 255, 220, 0.8);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes floatIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .education-container {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(3, 1fr);
-                height: calc(100vh - 130px);
-            }
-
-            .page-title {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                overflow-y: auto;
-                height: auto;
-            }
-
-            .education-container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-                height: auto;
-                gap: 15px;
-                padding: 0 15px 20px;
-            }
-
-            .school-card {
-                min-height: 250px;
-            }
-
-            .page-title {
-                font-size: 2rem;
-                padding: 1.5rem 0 0.8rem;
-            }
-
-            nav {
-                position: static;
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-
-            nav a {
-                font-size: 1rem;
-                margin: 0 0.5rem;
-            }
-        }
-    </style>
+/* Responsive Design */
+@media (max-width:1200px){
+    .education-container { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(3,1fr); height:calc(100vh - 130px); }
+    .page-title { font-size:2.5rem; }
+}
+@media (max-width:768px){
+    body{ overflow-y:auto; height:auto; }
+    .education-container{ grid-template-columns:1fr; grid-template-rows:auto; height:auto; gap:15px; padding:0 15px 20px; }
+    .school-card{ min-height:250px; }
+    .page-title{ font-size:2rem; padding:1.5rem 0 0.8rem; }
+    .top-nav{ position:static; text-align:center; margin-bottom:1rem; gap:10px; }
+    .top-nav a{ font-size:0.85rem; padding:6px 10px; }
+}
+</style>
 </head>
 <body>
-    <!-- Animated starfield canvas -->
-    <canvas id="starfield"></canvas>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="education.html" class="active">Education</a>
-        <a href="achievements.html">Achievements</a>
-    </nav>
+<canvas id="starfield"></canvas>
 
-    <!-- Bottom Navigation Buttons -->
-    <div class="bottom-nav">
-        <a href="index.html" class="nav-button">← Previous</a>
-        <a href="achievements.html" class="nav-button">Next →</a>
-    </div>
+<!-- TOP NAVIGATION -->
+<div class="top-nav">
+    <a href="index.html">Home</a>
+    <a href="education.html" class="active">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="myfamily.html">My Family</a>
+    <a href="batchmates.html">My Batchmates</a>
+</div>
 
-    <style>
-        /* Bottom Navigation Buttons */
-        .bottom-nav {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            z-index: 100;
-        }
+<!-- Page Title -->
+<h1 class="page-title">Educational Attainment</h1>
 
-        .nav-button {
-            padding: 0.7rem 1.5rem;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(14px);
-            color: #ffeecf;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-        }
-
-        .nav-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        @media (max-width: 768px) {
-            .bottom-nav {
-                gap: 15px;
-            }
-
-            .nav-button {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
-
-
-    <!-- Page Title -->
-    <h1 class="page-title">Educational Attainment</h1>
-    
-    <!-- Education Grid -->
-    <div class="education-container">
-        <!-- College -->
-        <div class="school-card">
-            <img src="uc.JPG" alt="University of the Cordilleras" class="school-image">
-            <div class="school-info">
-                <div class="school-level">College</div>
-                <div class="school-name">University of the Cordilleras</div>
-                <div class="school-years">Present</div>
-            </div>
-        </div>
-
-        <!-- Senior High School -->
-        <div class="school-card">
-            <img src="assatt.PNG" alt="ASSATT Christian School Inc." class="school-image">
-            <div class="school-info">
-                <div class="school-level">Senior High School</div>
-                <div class="school-name">ASSATT Christian School Inc.</div>
-                <div class="school-years">2023 – 2025</div>
-            </div>
-        </div>
-
-        <!-- Junior High School -->
-        <div class="school-card">
-            <img src="assatt.PNG" alt="ASSATT Christian School Inc." class="school-image">
-            <div class="school-info">
-                <div class="school-level">Junior High School</div>
-                <div class="school-name">ASSATT Christian School Inc.</div>
-                <div class="school-years">2018 – 2023</div>
-            </div>
-        </div>
-
-        <!-- Elementary (Fort Del Pilar) -->
-        <div class="school-card">
-            <img src="fdp.JPG" alt="Fort Del Pilar Elementary School" class="school-image">
-            <div class="school-info">
-                <div class="school-level">Elementary</div>
-                <div class="school-name">Fort Del Pilar Elementary School</div>
-                <div class="school-years">2016 – 2018</div>
-            </div>
-        </div>
-
-        <!-- Elementary (ASSATT) -->
-        <div class="school-card">
-            <img src="assatt.PNG" alt="ASSATT Christian School" class="school-image">
-            <div class="school-info">
-                <div class="school-level">Elementary</div>
-                <div class="school-name">ASSATT Christian School</div>
-                <div class="school-years">2012 – 2016</div>
-            </div>
-        </div>
-
-        <!-- Pre-School -->
-        <div class="school-card">
-            <img src="assatt.PNG" alt="ASSATT Christian School Inc." class="school-image">
-            <div class="school-info">
-                <div class="school-level">Pre-School</div>
-                <div class="school-name">ASSATT Christian School Inc.</div>
-                <div class="school-years">2011 – 2012</div>
-            </div>
+<!-- Education Grid -->
+<div class="education-container">
+    <!-- College -->
+    <div class="school-card">
+        <img src="uc.JPG" alt="University of the Cordilleras" class="school-image">
+        <div class="school-info">
+            <div class="school-level">College</div>
+            <div class="school-name">University of the Cordilleras</div>
+            <div class="school-years">Present</div>
         </div>
     </div>
+    <!-- Senior High School -->
+    <div class="school-card">
+        <img src="assatt.PNG" alt="ASSATT Christian School Inc." class="school-image">
+        <div class="school-info">
+            <div class="school-level">Senior High School</div>
+            <div class="school-name">ASSATT Christian School Inc.</div>
+            <div class="school-years">2023 – 2025</div>
+        </div>
+    </div>
+    <!-- Junior High School -->
+    <div class="school-card">
+        <img src="assatt.PNG" alt="ASSATT Christian School Inc." class="school-image">
+        <div class="school-info">
+            <div class="school-level">Junior High School</div>
+            <div class="school-name">ASSATT Christian School Inc.</div>
+            <div class="school-years">2018 – 2023</div>
+        </div>
+    </div>
+    <!-- Elementary (Fort Del Pilar) -->
+    <div class="school-card">
+        <img src="fdp.JPG" alt="Fort Del Pilar Elementary School" class="school-image">
+        <div class="school-info">
+            <div class="school-level">Elementary</div>
+            <div class="school-name">Fort Del Pilar Elementary School</div>
+            <div class="school-years">2016 – 2018</div>
+        </div>
+    </div>
+    <!-- Elementary (ASSATT) -->
+    <div class="school-card">
+        <img src="assatt.PNG" alt="ASSATT Christian School" class="school-image">
+        <div class="school-info">
+            <div class="school-level">Elementary</div>
+            <div class="school-name">ASSATT Christian School</div>
+            <div class="school-years">2012 – 2016</div>
+        </div>
+    </div>
+    <!-- Pre-School -->
+    <div class="school-card">
+        <img src="assatt.PNG" alt="ASSATT Christian School Inc." class="school-image">
+        <div class="school-info">
+            <div class="school-level">Pre-School</div>
+            <div class="school-name">ASSATT Christian School Inc.</div>
+            <div class="school-years">2011 – 2012</div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // Animated star background
-        const canvas = document.getElementById('starfield');
-        const ctx = canvas.getContext('2d');
-        let stars = [];
-        const numStars = 200;
+<!-- Bottom Navigation Buttons -->
+<div class="bottom-nav">
+    <a href="index.html" class="nav-button">← Previous</a>
+    <a href="achievements.html" class="nav-button">Next →</a>
+</div>
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            stars = Array.from({ length: numStars }, () => ({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 1.5,
-                alpha: Math.random(),
-                speed: Math.random() * 0.2 + 0.02
-            }));
-        }
+<!-- Custom Cursor -->
+<div id="custom-cursor"></div>
 
-        resize();
-        window.addEventListener('resize', resize);
+<script>
+// STARFIELD
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+const numStars = 200;
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({length:numStars},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,radius:Math.random()*1.5,alpha:Math.random(),speed:Math.random()*0.2+0.02}));
+}
+resize(); window.addEventListener('resize',resize);
+function animateStars(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle='#fff';
+    stars.forEach(star=>{
+        star.y+=star.speed;
+        if(star.y>canvas.height) star.y=0;
+        ctx.globalAlpha=star.alpha;
+        ctx.beginPath();
+        ctx.arc(star.x,star.y,star.radius,0,Math.PI*2);
+        ctx.fill();
+    });
+    requestAnimationFrame(animateStars);
+}
+animateStars();
 
-        function animateStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#fff';
-            stars.forEach(star => {
-                star.y += star.speed;
-                if (star.y > canvas.height) star.y = 0;
-                ctx.globalAlpha = star.alpha;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            requestAnimationFrame(animateStars);
-        }
+// CUSTOM CURSOR
+const cursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', e=>{
+    cursor.style.top=e.clientY+'px';
+    cursor.style.left=e.clientX+'px';
+    cursor.style.transform='translate(-50%,-50%)';
+});
 
-        animateStars();
+// CURSOR HOVER EFFECTS
+const hoverElements = document.querySelectorAll('.school-card, .nav-button, .top-nav a');
+hoverElements.forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+        cursor.style.width='40px';
+        cursor.style.height='40px';
+        cursor.style.opacity='1';
+        cursor.style.boxShadow='0 0 30px rgba(255,255,220,0.8)';
+    });
+    el.addEventListener('mouseleave',()=>{
+        cursor.style.width='25px';
+        cursor.style.height='25px';
+        cursor.style.opacity='0.8';
+        cursor.style.boxShadow='0 0 20px rgba(255,255,255,0.6)';
+    });
+});
+</script>
 
-        // Custom Cursor Glow Effect
-        const cursor = document.createElement('div');
-        cursor.id = 'custom-cursor';
-        document.body.appendChild(cursor);
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.top = e.clientY + 'px';
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.transform = 'translate(-50%, -50%)';
-        });
-
-        // Gentle pulsing effect
-        setInterval(() => {
-            cursor.style.transform += ' scale(1.05)';
-            setTimeout(() => cursor.style.transform = 'translate(-50%, -50%)', 200);
-        }, 1500);
-
-        // Enhanced hover effect for cards
-        const cards = document.querySelectorAll('.school-card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                cursor.style.width = '40px';
-                cursor.style.height = '40px';
-                cursor.style.opacity = '1';
-                cursor.style.boxShadow = '0 0 30px rgba(255, 255, 220, 0.8)';
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                cursor.style.width = '25px';
-                cursor.style.height = '25px';
-                cursor.style.opacity = '0.8';
-                cursor.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.6)';
-            });
-        });
-    </script>
 </body>
 </html>

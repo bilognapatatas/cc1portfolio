@@ -13,6 +13,40 @@ body { font-family:'Cormorant Garamond', serif; color:#f5f3ef; background: radia
 /* Page Title */
 .page-title { text-align:center; padding:2rem 0 1rem; font-family:'Great Vibes', cursive; font-size:3rem; color:#ffeecf; text-shadow:0 0 15px rgba(255,255,200,0.7); animation: floatIn 2s ease forwards; }
 
+/* TOP NAVIGATION */
+.top-nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 12px;
+}
+.top-nav a {
+    color: #ffeecf;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
+    opacity: 0.85;
+}
+.top-nav a:hover,
+.top-nav a.active {
+    opacity: 1;
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.15);
+}
+
+.top-nav a:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.15);
+}
+
 /* Achievements Grid */
 .achievements-container { display:grid; grid-template-columns: repeat(2,1fr); grid-template-rows:auto; gap:20px; max-width:1400px; height:calc(100vh - 120px); margin:0 auto; padding:0 20px; }
 .achievement-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(14px); border-radius:20px; padding:1rem; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; box-shadow:0 4px 20px rgba(255,255,255,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; opacity:0; transform: translateY(20px); }
@@ -23,18 +57,40 @@ body { font-family:'Cormorant Garamond', serif; color:#f5f3ef; background: radia
 .achievement-name { font-size:1.1rem; font-weight:700; margin-bottom:0.5rem; color:#ffeecf; }
 .achievement-details { font-size:0.95rem; color:#d3ecff; font-style:italic; }
 
-/* Bottom Navigation */
-.bottom-nav { position:fixed; bottom:20px; width:100%; display:flex; justify-content:center; gap:30px; z-index:100; }
-.nav-button { padding:0.7rem 1.5rem; border-radius:15px; background: rgba(255,255,255,0.08); backdrop-filter: blur(14px); color:#ffeecf; font-weight:600; text-decoration:none; box-shadow:0 4px 20px rgba(255,255,255,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; }
-.nav-button:hover { transform:translateY(-5px) scale(1.05); box-shadow:0 8px 30px rgba(255,255,255,0.2); background: rgba(255,255,255,0.15); }
+/* Bottom Navigation Buttons */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;      
+    display: flex;
+    gap:10px;
+    z-index: 100;
+}
+
+.nav-button {
+    padding: 0.7rem 1.5rem;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    color: #ffeecf;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.nav-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+}
 
 /* Responsive */
 @media(max-width:1200px){ .achievements-container{ grid-template-columns:1fr 1fr; grid-template-rows:auto; } }
 @media(max-width:768px){ body{ overflow-y:auto; height:auto; } .achievements-container{ grid-template-columns:1fr; grid-template-rows:auto; gap:15px; height:auto; padding:0 15px 20px; } }
 
 /* Cursor */
-#custom-cursor { position:fixed; top:0; left:0; width:25px; height:25px; border-radius:50%; pointer-events:none; background: radial-gradient(circle, #ffeecf 20%, #a7d8ff 80%); box-shadow:0 0 20px rgba(255,255,255,0.6); mix-blend-mode:screen; opacity:0.8; transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, opacity 0.3s ease, box-shadow 0.3s ease; z-index:1000; }
-.achievement-card:hover ~ #custom-cursor, a:hover ~ #custom-cursor { width:40px; height:40px; opacity:1; box-shadow:0 0 30px rgba(255,255,220,0.8); }
+#custom-cursor { position:fixed; top:0; left:0; width:25px; height:25px; border-radius:50%; pointer-events:none; background: radial-gradient(circle, #ffeecf 20%, #a7d8ff 80%); box-shadow:0 0 20px rgba(255,255,255,0.6); mix-blend-mode:screen; opacity:0.8; transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, box-shadow 0.15s ease; z-index:9999; }
 
 /* Starfield Canvas */
 #starfield { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
@@ -49,6 +105,15 @@ body { font-family:'Cormorant Garamond', serif; color:#f5f3ef; background: radia
 
 <h1 class="page-title">Achievements</h1>
 
+<!-- TOP NAVIGATION -->
+<div class="top-nav">
+    <a href="index.html">Home</a>
+    <a href="education.html">Education</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="myfamily.html">My Family</a>
+    <a href="batchmates.html">My Batchmates</a>
+</div>
+
 <div class="achievements-container">
     <div class="achievement-card glass">
         <img src="jhs.JPG" alt="JHS Achievement" class="achievement-image">
@@ -60,7 +125,7 @@ body { font-family:'Cormorant Garamond', serif; color:#f5f3ef; background: radia
         <img src="shs.JPG" alt="SHS Achievement 1" class="achievement-image">
         <div class="achievement-level">Senior High School</div>
         <div class="achievement-name">With High Honors</div>
-           <div class="achievement-details">2024 – 2025</div>
+        <div class="achievement-details">2024 – 2025</div>
     </div>
     <div class="achievement-card glass">
         <img src="prov.JPG" alt="SHS Achievement 2" class="achievement-image">
@@ -69,7 +134,7 @@ body { font-family:'Cormorant Garamond', serif; color:#f5f3ef; background: radia
         <div class="achievement-details">Impromptu Speaking - Provincial Eliminations 2025</div>
     </div>
     <div class="achievement-card glass">
-        <img src="reg.HEIC" alt="SHS Achievement 3" class="achievement-image">
+        <img src="reg.jpg" alt="SHS Achievement 3" class="achievement-image">
         <div class="achievement-level">Senior High School</div>
         <div class="achievement-name">UP Namnama 2nd Runner Up</div>
         <div class="achievement-details">Impromptu Speaking - Regional Finals 2025</div>
@@ -84,7 +149,7 @@ body { font-family:'Cormorant Garamond', serif; color:#f5f3ef; background: radia
 <div id="custom-cursor"></div>
 
 <script>
-// Starfield
+// STARFIELD
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
 let stars = [];
@@ -119,20 +184,19 @@ const observer = new IntersectionObserver(entries=>{
 },{threshold:0.2});
 sections.forEach(section=>observer.observe(section));
 
-// Custom cursor
+// SMOOTH CUSTOM CURSOR
 const cursor = document.getElementById('custom-cursor');
-document.addEventListener('mousemove', e=>{
-    cursor.style.top=e.clientY+'px';
-    cursor.style.left=e.clientX+'px';
-    cursor.style.transform='translate(-50%,-50%)';
-});
-setInterval(()=>{
-    cursor.style.transform += ' scale(1.05)';
-    setTimeout(()=>cursor.style.transform='translate(-50%,-50%)',200);
-},1500);
+let mouseX = 0, mouseY = 0;
+let currentX = 0, currentY = 0;
+const speed = 0.15;
 
-// Hover effects
-const hoverElements = document.querySelectorAll('.achievement-card, .nav-button');
+document.addEventListener('mousemove', e=>{
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+const hoverElements = document.querySelectorAll('.achievement-card, .nav-button, .top-nav a');
+
 hoverElements.forEach(el=>{
     el.addEventListener('mouseenter',()=>{
         cursor.style.width='40px';
@@ -145,9 +209,17 @@ hoverElements.forEach(el=>{
         cursor.style.height='25px';
         cursor.style.opacity='0.8';
         cursor.style.boxShadow='0 0 20px rgba(255,255,255,0.6)';
-    
     });
 });
+
+function animateCursor(){
+    currentX += (mouseX - currentX) * speed;
+    currentY += (mouseY - currentY) * speed;
+    cursor.style.top = currentY + "px";
+    cursor.style.left = currentX + "px";
+    requestAnimationFrame(animateCursor);
+}
+animateCursor();
 </script>
 
 </body>
